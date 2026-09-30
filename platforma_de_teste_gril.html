@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ro" class="h-full bg-slate-900">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platformă Teste Grilă - Relații Internaționale & Studii de Securitate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae0fd',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                            950: '#172554',
+                        },
+                        navy: {
+                            800: '#0f172a',
+                            900: '#0b0f19',
+                            950: '#05070d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-card:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="h-full font-sans text-slate-200 antialiased bg-navy-950 flex flex-col min-h-screen selection:bg-brand-500 selection:text-white">
+
+    <header class="sticky top-0 z-40 border-b border-slate-800/80 glass-panel">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo & Academic Title -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="showDashboard()">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-brand-500/20">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="text-base sm:text-lg font-bold text-white tracking-tight">Seminar Quiz Platform</h1>
+                            <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded bg-brand-500/20 text-brand-300 border border-brand-500/30">2 Cursuri</span>
+                        </div>
+                        <p class="text-xs text-slate-400">Intervenție Umanitară & Forme de Intervenție</p>
+                    </div>
+                </div>
+
+                <!-- Navigation & Controls -->
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <button onclick="showDashboard()" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-border-all text-brand-400"></i>
+                        <span class="hidden sm:inline">Module Seminar</span>
+                    </button>
+                    <div class="h-5 w-px bg-slate-800"></div>
+                    <button onclick="resetAllProgress()" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-all flex items-center gap-2 border border-rose-500/20">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <span class="hidden sm:inline">Reset Progres</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- ================= DASHBOARD VIEW ================= -->
+        <section id="dashboardView" class="space-y-8">
+            <!-- Academic Banner -->
+            <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 border border-slate-800 p-6 sm:p-10 shadow-2xl">
+                <div class="absolute -right-12 -bottom-12 opacity-10 text-9xl text-brand-400 pointer-events-none">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                    <div class="lg:col-span-2 space-y-3">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 bg-brand-500/10 border border-brand-500/20 rounded-full text-brand-300 text-xs font-bold">
+                            <i class="fa-solid fa-book-bookmark text-brand-400"></i>
+                            <span>Evaluare Seminar Relații Internaționale</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                            Module de Pregătire
+                        </h2>
+                        <p class="text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed">
+                            Testează-ți cunoștințele teoretice din cadrul seminarului. Completează grilele pentru fiecare lectură, analizează explicațiile detaliate și refă testele pentru a obține scorul maxim.
+                        </p>
+                    </div>
+
+                    <!-- Progress Summary Widget -->
+                    <div class="bg-slate-900/80 backdrop-blur-xl rounded-2xl p-5 border border-slate-700/60 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Statistici Generale</span>
+                            <span id="overallPercentage" class="text-lg font-black text-brand-400">0%</span>
+                        </div>
+                        
+                        <!-- Progress Bar -->
+                        <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden p-0.5 border border-slate-700">
+                            <div id="overallProgressBar" class="bg-gradient-to-r from-brand-600 via-indigo-500 to-brand-400 h-2 rounded-full transition-all duration-700 ease-out" style="width: 0%"></div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 pt-2 text-xs">
+                            <div class="bg-slate-800/50 p-2.5 rounded-xl border border-slate-700/40">
+                                <span class="text-slate-400 block text-[10px] uppercase font-bold">Completate</span>
+                                <span id="completedCount" class="text-base font-extrabold text-white">0 / 2</span>
+                            </div>
+                            <div class="bg-slate-800/50 p-2.5 rounded-xl border border-slate-700/40">
+                                <span class="text-slate-400 block text-[10px] uppercase font-bold">Punctaj Mediu</span>
+                                <span id="averageScore" class="text-base font-extrabold text-emerald-400">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modules Cards Grid -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-brand-500"></i> Lecturi Disponibile
+                    </h3>
+                    <span class="text-xs text-slate-400 font-medium">Selectează un modul pentru a începe</span>
+                </div>
+
+                <div id="lecturesGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Cards will be populated dynamically by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= QUIZ INTERFACE VIEW ================= -->
+        <section id="quizView" class="hidden space-y-6">
+            <!-- Quiz Bar -->
+            <div class="glass-panel rounded-2xl p-4 sm:p-5 flex flex-wrap gap-4 items-center justify-between border border-slate-800 shadow-xl">
+                <button onclick="showDashboard()" class="text-slate-400 hover:text-white text-xs sm:text-sm font-semibold flex items-center gap-2 transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i> Înapoi la Module
+                </button>
+
+                <div class="flex items-center gap-3">
+                    <span id="quizBadge" class="px-3 py-1 text-xs font-extrabold rounded-lg bg-brand-500/20 text-brand-300 border border-brand-500/30">
+                        Lecture 1
+                    </span>
+                    <h2 id="quizTitle" class="text-base sm:text-lg font-bold text-white truncate max-w-xs sm:max-w-md">Titlu Curs</h2>
+                </div>
+
+                <div class="text-xs sm:text-sm font-bold text-slate-400 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700">
+                    Întrebarea <span id="currentQuestionNum" class="text-brand-400 font-extrabold">1</span> / <span id="totalQuestionsNum">10</span>
+                </div>
+            </div>
+
+            <!-- Quiz Layout: Main Question Box + Sidebar Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- Question Card -->
+                <div class="lg:col-span-3 glass-panel rounded-3xl p-6 sm:p-8 flex flex-col justify-between min-h-[460px] border border-slate-800 relative shadow-2xl">
+                    <div>
+                        <div class="flex items-center justify-between border-b border-slate-800/80 pb-4 mb-6">
+                            <span id="questionCategory" class="text-xs font-bold uppercase tracking-wider text-brand-400 bg-brand-500/10 px-2.5 py-1 rounded-md border border-brand-500/20">
+                                Categorie
+                            </span>
+                            <span class="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
+                                <i class="fa-regular fa-circle-dot text-brand-400"></i> O singură variantă corectă
+                            </span>
+                        </div>
+
+                        <h3 id="questionText" class="text-lg sm:text-xl font-bold text-white mb-6 leading-relaxed">
+                            Textul întrebării va apărea aici...
+                        </h3>
+
+                        <!-- Options Container -->
+                        <div id="optionsContainer" class="space-y-3.5">
+                            <!-- Injected dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Bottom Nav Controls -->
+                    <div class="flex items-center justify-between pt-6 border-t border-slate-800/80 mt-8">
+                        <button id="prevBtn" onclick="navigateQuestion(-1)" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 border border-slate-700 disabled:opacity-40 disabled:cursor-not-allowed">
+                            <i class="fa-solid fa-chevron-left"></i> Anterioara
+                        </button>
+
+                        <div class="flex items-center gap-3">
+                            <button id="nextBtn" onclick="navigateQuestion(1)" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs sm:text-sm transition-all flex items-center gap-2 shadow-lg shadow-brand-600/20">
+                                Următoarea <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                            <button id="submitBtn" onclick="submitQuiz()" class="hidden px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm transition-all flex items-center gap-2 shadow-lg shadow-emerald-600/30">
+                                <i class="fa-solid fa-paper-plane"></i> Finalizează Testul
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar Question Navigator -->
+                <div class="glass-panel rounded-3xl p-5 space-y-5 border border-slate-800 h-fit">
+                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                        <h4 class="font-bold text-white text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-grip text-brand-400"></i> Harta Grilelor
+                        </h4>
+                        <span id="answeredBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300">
+                            0/10
+                        </span>
+                    </div>
+
+                    <p class="text-xs text-slate-400 leading-normal">
+                        Apasă pe un număr pentru a naviga direct la o grilă.
+                    </p>
+
+                    <!-- Question Grid Bubbles -->
+                    <div id="questionMapGrid" class="grid grid-cols-5 gap-2.5 pt-1">
+                        <!-- Bubbles 1 to 10 injected here -->
+                    </div>
+
+                    <div class="border-t border-slate-800 pt-4 space-y-2 text-xs text-slate-400">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-3 h-3 rounded-md bg-slate-800 border border-slate-700"></span>
+                            <span>Necompletat</span>
+                        </div>
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-3 h-3 rounded-md bg-brand-600"></span>
+                            <span>Răspuns Selectat</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= RESULTS & REVIEW VIEW ================= -->
+        <section id="resultsView" class="hidden space-y-8">
+            <!-- Score Card -->
+            <div class="glass-panel rounded-3xl border border-slate-800 p-8 text-center max-w-2xl mx-auto space-y-6 shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="inline-flex p-5 rounded-3xl bg-slate-800/80 text-brand-400 border border-slate-700 text-5xl shadow-xl" id="resultIcon">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white" id="resultMessage">Rezultatele Testului</h2>
+                    <p class="text-slate-400 text-sm mt-1" id="resultSubtitle">Aici găsești analiza performanței tale la acest modul.</p>
+                </div>
+
+                <!-- Stats Box -->
+                <div class="grid grid-cols-2 gap-4 p-4 bg-slate-900/90 rounded-2xl border border-slate-800">
+                    <div class="space-y-1">
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400">Punctaj Obținut</span>
+                        <div class="text-3xl font-black text-white" id="finalScoreText">0 / 10</div>
+                    </div>
+                    <div class="space-y-1 border-l border-slate-800">
+                        <span class="text-[10px] uppercase font-bold tracking-widest text-slate-400">Procentaj</span>
+                        <div class="text-3xl font-black text-brand-400" id="finalPercentageText">0%</div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex flex-wrap justify-center gap-3 pt-2">
+                    <button id="retryBtn" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs sm:text-sm transition-all flex items-center gap-2 shadow-lg shadow-brand-600/25">
+                        <i class="fa-solid fa-rotate-right"></i> Refă Testul Acum
+                    </button>
+                    <button onclick="showDashboard()" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs sm:text-sm transition-all flex items-center gap-2 border border-slate-700">
+                        <i class="fa-solid fa-house"></i> Înapoi la Module
+                    </button>
+                </div>
+            </div>
+
+            <!-- Detailed Feedback Breakdown -->
+            <div class="glass-panel rounded-3xl border border-slate-800 p-6 sm:p-8 space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-brand-400"></i> Revizuire Detaliată & Explicații
+                    </h3>
+                    <span class="text-xs text-slate-400">Toate cele 10 întrebări ale modulului</span>
+                </div>
+
+                <div id="detailedFeedbackContainer" class="space-y-6">
+                    <!-- Injected JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-navy-900/60 py-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
+            Platformă didactică de teste grilă &bull; Relații Internaționale & Studii de Securitate
+        </div>
+    </footer>
+
+    <script>
+        // Exact Dataset from user prompt for Lecture 1 & Lecture 2
+        const lecturesData = [
+            {
+                id: 'lecture-1',
+                badge: 'Lecture 1',
+                title: 'Defining Humanitarian Intervention',
+                description: 'Aspecte conceptuale, definițiile date de R.J. Vincent, J.L. Holzgrefe, M. Walzer, dilemele dreptului internațional și suveranitatea.',
+                icon: 'fa-scale-balanced',
+                questions: [
+                    {
+                        id: 'q1_1',
+                        category: 'Definiții (R.J. Vincent)',
+                        question: 'Potrivit definiției date de R.J. Vincent, intervenția este reprezentată de:',
+                        options: [
+                            'O activitate pașnică desfășurată de organizații neguvernamentale pentru acordarea de ajutor umanitar.',
+                            'O activitate prin care se intervine coercitiv în treburile interne ale altui stat, fiind un eveniment discret ce vizează structura de autoritate a statului țintă.',
+                            'O acțiune întotdeauna legală conform dreptului internațional, realizată cu acordul expres al guvernului gazdă.',
+                            'O sancțiune economică aplicată pe termen nelimitat de către Consiliul de Securitate al ONU.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'R.J. Vincent definește intervenția ca fiind o ingerință coercitivă discretă orientată direct împotriva structurii de autoritate a unui stat.'
+                    },
+                    {
+                        id: 'q1_2',
+                        category: 'Definiții (J.L. Holzgrefe)',
+                        question: 'Cum definește J.L. Holzgrefe intervenția umanitară?',
+                        options: [
+                            'Drept acordarea de asistență medicală neutră în zone de conflict, indiferent de consimțământul statului.',
+                            'Amenințarea sau folosirea forței peste frontiere de către un stat (sau grup de state) pentru a preveni ori opri violări grave ale drepturilor omului ale cetățenilor proprii.',
+                            'Amenințarea sau folosirea forței peste frontiere de către un stat (sau grup de state) orientată spre prevenirea sau oprirea violărilor grave ale drepturilor fundamentale ale persoanelor, altele decât propriii cetățeni, fără permisiunea statului pe teritoriul căruia se aplică forța.',
+                            'Orice formă de sancțiune diplomatică și economică impusă de comunitatea internațională împotriva unui stat autoritar.'
+                        ],
+                        correctIndex: 2,
+                        explanation: 'Definiția lui Holzgrefe pune accent pe folosirea forței transfrontaliere fără permisiunea statului gazdă, dedicată protejării altor persoane decât cetățenii proprii.'
+                    },
+                    {
+                        id: 'q1_3',
+                        category: 'Delimitări Conceptuale',
+                        question: 'Ce tipuri de acțiuni exclude deliberat J.L. Holzgrefe din definiția sa operativă a intervenției umanitare?',
+                        options: [
+                            'Intervențiile militare autorizate de ONU.',
+                            'Intervențiile non-coercitive (sancțiuni economice sau diplomatice) și intervențiile coercitive menite să protejeze ori să salveze propriii cetățeni ai statului intervenient.',
+                            'Misiunile umanitare de acordare de ajutoare conduse de Comitetul Internațional al Crucii Roșii.',
+                            'Operțiunile militare de menținere a păcii.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'Holzgrefe exclude acțiunile non-coercitive (diplomatice/economice) precum și operațiunile coercitive dedicate protejării propriilor cetățeni.'
+                    },
+                    {
+                        id: 'q1_4',
+                        category: 'Justificare Morală (M. Walzer)',
+                        question: 'Conform lui Michael Walzer, când este justificată o intervenție umanitară?',
+                        options: [
+                            'Când este autorizată în unanimitate de toate marile puteri din Consiliul de Securitate.',
+                            'Când reprezintă un răspuns (cu așteptări rezonabile de succes) la acțiuni care „șochează conștiința morală a omenirii”.',
+                            'Când liderii politici își exprimă indignarea personală față de un conflict extern.',
+                            'Doar atunci când statul țintă își dă acordul în scris pentru intervenția armată.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'Michael Walzer susține că intervenția se justifică moral ca răspuns la atrocități extraordinare care „șochează conștiința morală a omenirii”.'
+                    },
+                    {
+                        id: 'q1_5',
+                        category: 'Conștiința Morală (M. Walzer)',
+                        question: 'La ce se referă Michael Walzer când menționează „conștiința morală” necesară justificării intervenției?',
+                        options: [
+                            'La deciziile de politică externă ale liderilor politici responsabili.',
+                            'La tratatele internaționale semnate la nivel diplomatic.',
+                            'La convingerile morale ale oamenilor obișnuiți, dobândite în cursul activităților lor de zi cu zi.',
+                            'La doctrina oficială a Națiunilor Unite privind suveranitatea de stat.'
+                        ],
+                        correctIndex: 2,
+                        explanation: 'Walzer conectează conștiința morală direct la valorile comune și convingerile fundamentale ale oamenilor obișnuiți.'
+                    },
+                    {
+                        id: 'q1_6',
+                        category: 'Clasificări (Wheeler & Bellamy)',
+                        question: 'Nicholas Wheeler și Alex Bellamy clasifică activitățile umanitare ale Comitetului Internațional al Crucii Roșii (ICRC) drept:',
+                        options: [
+                            'Intervenție coercitivă non-consensuală.',
+                            'Intervenție non-coercitivă consensuală, deoarece activitatea sa este corelată cu acordul guvernelor suverane.',
+                            'Intervenție armată directă.',
+                            'Intervenție politică în structura de autoritate a statului.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'ICRC activează prin mijloace pașnice și pe baza consimțământului guvernelor suverane (intervenție non-coercitivă consensuală).'
+                    },
+                    {
+                        id: 'q1_7',
+                        category: 'Actori Umanitari (MSF)',
+                        question: 'Activitatea organizației Médecins sans Frontières (MSF) este încadrată de Wheeler și Bellamy ca fiind un exemplu de:',
+                        options: [
+                            'Intervenție non-coercitivă non-consensuală, deoarece activează fără acordul guvernelor gazdă.',
+                            'Intervenție militară coercitivă.',
+                            'Intervenție bazată pe respectarea strictă a suveranității statului gazdă.',
+                            'Sancțiune economică de stat.'
+                        ],
+                        correctIndex: 0,
+                        explanation: 'MSF acționează deseori fără a aștepta permisiunea guvernelor gazdă, oferind ajutor medical necoercitiv dar non-consensual.'
+                    },
+                    {
+                        id: 'q1_8',
+                        category: 'Tensiuni Normative',
+                        question: 'Ce ciocnire de principii identifică Wheeler și Bellamy în societatea internațională de după al Doilea Război Mondial?',
+                        options: [
+                            'Conflictul dintre globalizarea economică și protecționismul național.',
+                            'Conflictul dintre normele privind drepturile omului (care interzic genocidul și tortura) și principiile suveranității și non-intervenției.',
+                            'Tensiunea dintre regulile comerciale și protecția mediului.',
+                            'Incompatibilitatea dintre dreptul mării și dreptul spațial.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'Tensiunea centrală este între protecția universală a drepturilor omului și normele consacrate ale suveranității statale.'
+                    },
+                    {
+                        id: 'q1_9',
+                        category: 'Evoluție Post-Război Rece',
+                        question: 'Cum s-a modificat percepția asupra intervenției umanitare după încheierea Războiului Rece?',
+                        options: [
+                            'A devenit complet interzisă prin dreptul internațional.',
+                            'A rămas considerată ilegitimă în toate circumstanțele.',
+                            'A avut loc o schimbare treptată datorită interdependenței globale și procesului de globalizare.',
+                            'A fost înlocuită exclusiv cu intervenții unilaterale regionale.'
+                        ],
+                        correctIndex: 2,
+                        explanation: 'Globalizarea și intensificarea interdependenței au creat cadrul unei acceptări crescute a legitimității intervențiilor umanitare.'
+                    },
+                    {
+                        id: 'q1_10',
+                        category: 'Turnura Umanitară (Ian Holliday)',
+                        question: 'Ce doi factori cheie identifică Ian Holliday ca fiind decisivi pentru „turnura umanitară” (humanitarian turn) din anii 1990?',
+                        options: [
+                            'Războiul din Vietnam și extinderea Comunității Europene.',
+                            'Națiunile Unite (împreună cu rolul Secretarului General) și „noii” umanitari.',
+                            'Apariția internetului și tratatele de dezarmare.',
+                            'Prăbușirea Ligii Națiunilor și decolonizarea.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'Ian Holliday evidențiază rolul proactiv al ONU/Secretarului General și dinamica mișcării „noilor” umanitari.'
+                    }
+                ]
+            },
+            {
+                id: 'lecture-2',
+                badge: 'Lecture 2',
+                title: 'Forms of Intervention',
+                description: 'Ciclul intervenției (Roderick von Lipsey), prevenire, mitigare, rezoluție, peacekeeping, peace enforcement și peace-building.',
+                icon: 'fa-shield-halved',
+                questions: [
+                    {
+                        id: 'q2_1',
+                        category: 'Ciclul Intervenției (Lipsey)',
+                        question: 'Conform ciclei intervenției elaborate de Roderick von Lipsey, cum este conceptualizat termenul generic de „intervenție”?',
+                        options: [
+                            'Ca o acțiune militară coercitivă care echivalează întotdeauna cu o declarare oficială de război.',
+                            'Ca o acțiune deliberată presupusă a fi benignă, adică lipsită de ingerințe politice sau ideologice.',
+                            'Ca o măsură economică bazată pe sancțiuni comerciale unilaterale.',
+                            'Ca o activitate desfășurată exclusiv de organizații neguvernamentale civile.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'Lipsey conceptualizează termenul generic de intervenție ca o acțiune intenționată și intrinsic benignă.'
+                    },
+                    {
+                        id: 'q2_2',
+                        category: 'Prevenire (Prevention)',
+                        question: 'În cadrul ciclei intervenției, „prevenirea” (prevention) se referă la:',
+                        options: [
+                            'Măsurile de urgență aplicate doar după izbucnirea războiului pentru a opri ostilitățile.',
+                            'Preîntâmpinarea celei mai nedorite evoluții a unui conflict (violența) prin reducerea tensiunilor și menținerea status quo-ului.',
+                            'Reconstrucția instituțională și organizarea de alegeri în faza post-conflict.',
+                            'Impunerea forțată a păcii prin operațiuni de luptă autorizate de ONU.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'Prevenirea urmărește conservarea status quo-ului și descurajarea escaladării violenței înainte de declanșarea războiului.'
+                    },
+                    {
+                        id: 'q2_3',
+                        category: 'Rezoluție (Resolution)',
+                        question: 'Cum diferă măsurile de „rezoluție” (resolution) față de cele de „prevenire” (prevention)?',
+                        options: [
+                            'Măsurile de rezoluție mențin status quo-ul, pe când prevenirea îl modifică.',
+                            'Măsurile de rezoluție presupun modificări fundamentale ale status quo-ului (modificarea granițelor, amnistii, restituiri), în timp ce prevenirea caută conservarea status quo-ului.',
+                            'Măsurile de rezoluție sunt aplicate exclusiv de ONG-uri, iar prevenirea doar de către armată.',
+                            'Măsurile de rezoluție au loc înainte de izbucnirea violenței, iar prevenirea după încheierea războiului.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'Rezoluția implică schimbarea structurală a status quo-ului, pe când prevenirea încearcă să îl păstreze stabil.'
+                    },
+                    {
+                        id: 'q2_4',
+                        category: 'Mitigare (Mitigation)',
+                        question: 'Măsurile de „mitigare” (mitigation) sunt caracterizate prin:',
+                        options: [
+                            'Aplicarea lor înainte de izbucnirea violențelor pentru a preveni războiul.',
+                            'Utilizarea lor doar după izbucnirea violenței pentru a reduce actele de violență și a restaura calmul, adesea prin interpunerea unor forțe neutrale.',
+                            'Anularea tuturor acordurilor de încetare a focului.',
+                            'Schimbarea regimului politic din statul țintă prin acțiuni subversive.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'Mitigarea este o măsură reactivă (post-izbucnire) de limitare a daunelor și reducere a intensității violențelor.'
+                    },
+                    {
+                        id: 'q2_5',
+                        category: 'Carta ONU (Capitolul VI)',
+                        question: 'Operațiunile de menținere a păcii („peacekeeping”) în forma lor tradițională sunt asociate în principal cu ce capitol din Carta ONU?',
+                        options: [
+                            'Capitolul I din Carta ONU.',
+                            'Capitolul VI din Carta ONU.',
+                            'Capitolul VII din Carta ONU.',
+                            'Capitolul XII din Carta ONU.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'Peacekeeping-ul tradițional funcționează pe baza principiilor Capitolului VI privind rezolvarea pașnică a diferendelor.'
+                    },
+                    {
+                        id: 'q2_6',
+                        category: 'Căștile Albastre (Peacekeepers)',
+                        question: 'Care sunt trăsăturile fundamentale ale trupelor de menținere a păcii („peacekeepers” / căștile albastre)?',
+                        options: [
+                            'Sunt trupe de luptă greu înarmate care acționează fără acordul părților aflate în conflict.',
+                            'Sunt forțe de poliție sau militare ușor înarmate, extrem de vizibile, care operează în baza consimțământului părților și folosesc forța doar în legitimă apărare.',
+                            'Sunt unități speciale acoperite care efectuează misiuni de recunoaștere.',
+                            'Sunt grupuri eminamente civile care nu au dreptul de a purta armament sau echipament de protecție.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'Căștile albastre se remarcă prin vizibilitate, armament ușor, operare cu consimțământ și folosirea forței exclusiv în defensivă.'
+                    },
+                    {
+                        id: 'q2_7',
+                        category: 'Muscular Peacekeeping',
+                        question: 'Conceptul de operațiuni „UN Chapter Six-and-a-half” sau „muscular peacekeeping” este exemplificat în curs prin:',
+                        options: [
+                            'Misiunea UNFICYP din Cipru.',
+                            'Misiunile UNITAF din Somalia și UNPROFOR din Bosnia-Herțegovina.',
+                            'Intervenția NATO din Libia din anul 2011.',
+                            'Misiunile umanitare desfășurate de Comitetul Internațional al Crucii Roșii.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'UNITAF și UNPROFOR ilustrează tranziția spre mandate mai robuste, cunoscute neoficial sub denumirea de Capitolul 6.5.'
+                    },
+                    {
+                        id: 'q2_8',
+                        category: 'Peace Enforcement (Cap. VII)',
+                        question: 'Care este principala diferență între impunerea păcii („peace enforcement”) și menținerea păcii („peacekeeping”)?',
+                        options: [
+                            'Impunerea păcii necesită acordul scris al tuturor combatanților și încetarea prealabilă a focului.',
+                            'Impunerea păcii este o operațiune de luptă autorizată sub Capitolul VII din Carta ONU, care NU necesită consimțământul părților și nici încetarea prealabilă a ostilităților.',
+                            'Impunerea păcii se realizează doar prin diplomație secretă condusă de Secretarul General.',
+                            'Menținerea păcii este echivalentă din punct de vedere juridic cu o declarație de război.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'Peace enforcement sub Capitolul VII este coercitiv, putând fi executat direct fără acordul combatanților.'
+                    },
+                    {
+                        id: 'q2_9',
+                        category: 'Crearea Păcii (Peacemaking)',
+                        question: 'Procesul de creare a păcii („peacemaking”) în cadrul ONU se bazează în principal pe:',
+                        options: [
+                            'Forțarea militară directă a combatanților prin bombardamente aeriene.',
+                            'Mijloace diplomatice, mediere, folosirea „bunelor oficii” (good offices) și diplomația discretă a Secretarului General sau a trimișilor speciali.',
+                            'Desfășurarea automată a trupelor de luptă pe linia de demarcație fără negocieri.',
+                            'Implimentarea directă a unor sancțiuni economice fără consultarea părților.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'Peacemaking-ul folosește instrumente diplomatice, mediere și negociere pentru aducerea părților la acord.'
+                    },
+                    {
+                        id: 'q2_10',
+                        category: 'Peace-building Post-Conflict',
+                        question: 'Ce activități sunt specifice etapei de consolidare a păcii post-conflict („post-conflict peace-building”)?',
+                        options: [
+                            'Interpunerea coercitivă a trupelor de luptă între facțiunile aflate în plin război.',
+                            'Demobilizarea și reintegrarea combatanților, sprijinirea reformei sectorului de securitate și justiție, precum și sprijinirea organizării alegerilor.',
+                            'Preservarea tensiunilor interetnice fără reforme instituționale.',
+                            'Aplicarea de sancțiuni diplomatice unilaterale.'
+                        ],
+                        correctIndex: 1,
+                        explanation: 'Peace-building vizează reconstrucția pe termen lung: demobilizare, reformă instituțională, alegeri și stabilitate socială.'
+                    }
+                ]
+            }
+        ];
+
+        // Global State
+        let currentLecture = null;
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let appScores = {};
+
+        // Lifecycle & Storage
+        window.addEventListener('DOMContentLoaded', () => {
+            loadScoresFromStorage();
+            renderDashboard();
+        });
+
+        function loadScoresFromStorage() {
+            try {
+                const stored = localStorage.getItem('seminar_quiz_scores');
+                if (stored) {
+                    appScores = JSON.parse(stored);
+                }
+            } catch (e) {
+                console.error('Eroare la citirea din localStorage', e);
+                appScores = {};
+            }
+        }
+
+        function saveScoresToStorage() {
+            try {
+                localStorage.setItem('seminar_quiz_scores', JSON.stringify(appScores));
+            } catch (e) {
+                console.error('Eroare la salvarea în localStorage', e);
+            }
+        }
+
+        function resetAllProgress() {
+            if (confirm('Sigur dorești să resetezi tot progresul și scorurile salvate pentru toate lecturile?')) {
+                appScores = {};
+                localStorage.removeItem('seminar_quiz_scores');
+                renderDashboard();
+                showDashboard();
+            }
+        }
+
+        function resetSingleLectureProgress(lectureId, event) {
+            if (event) event.stopPropagation();
+            if (confirm('Dorești să ștergi scorul salvat pentru această lectură?')) {
+                delete appScores[lectureId];
+                saveScoresToStorage();
+                renderDashboard();
+            }
+        }
+
+        // View Navigators
+        function showDashboard() {
+            document.getElementById('dashboardView').classList.remove('hidden');
+            document.getElementById('quizView').classList.add('hidden');
+            document.getElementById('resultsView').classList.add('hidden');
+            renderDashboard();
+        }
+
+        function renderDashboard() {
+            const grid = document.getElementById('lecturesGrid');
+            grid.innerHTML = '';
+
+            let totalLectures = lecturesData.length;
+            let completedLectures = 0;
+            let sumPercentage = 0;
+
+            lecturesData.forEach(lecture => {
+                const scoreData = appScores[lecture.id];
+                const isCompleted = !!scoreData;
+
+                if (isCompleted) {
+                    completedLectures++;
+                    sumPercentage += scoreData.percentage;
+                }
+
+                const scoreBadgeText = isCompleted ? `${scoreData.score}/10 (${scoreData.percentage}%)` : 'Necompletat';
+                const scoreBadgeClass = isCompleted 
+                    ? (scoreData.percentage >= 70 
+                        ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' 
+                        : 'bg-amber-500/20 text-amber-300 border-amber-500/30')
+                    : 'bg-slate-800 text-slate-400 border-slate-700';
+
+                const cardHtml = `
+                    <div class="glass-card rounded-3xl p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:translate-y-[-2px] group">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 text-xs font-black rounded-lg bg-brand-500/20 text-brand-300 border border-brand-500/30">
+                                    ${lecture.badge}
+                                </span>
+                                <span class="px-2.5 py-1 text-xs font-bold rounded-lg border ${scoreBadgeClass}">
+                                    <i class="fa-solid ${isCompleted ? 'fa-check-circle' : 'fa-circle-dot'} mr-1"></i>
+                                    ${scoreBadgeText}
+                                </span>
+                            </div>
+
+                            <div class="flex items-start gap-4 mb-3">
+                                <div class="w-12 h-12 rounded-2xl bg-brand-500/10 border border-brand-500/20 text-brand-400 flex items-center justify-center text-xl shrink-0 group-hover:scale-110 transition-transform">
+                                    <i class="fa-solid ${lecture.icon}"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-white group-hover:text-brand-300 transition-colors">${lecture.title}</h4>
+                                    <p class="text-xs text-slate-400 mt-1 font-semibold">${lecture.questions.length} Grile de Seminar</p>
+                                </div>
+                            </div>
+
+                            <p class="text-xs sm:text-sm text-slate-300 mb-6 leading-relaxed">
+                                ${lecture.description}
+                            </p>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                            <button onclick="startQuiz('${lecture.id}')" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs sm:text-sm transition-all flex items-center gap-2 shadow-lg shadow-brand-600/20">
+                                <i class="fa-solid ${isCompleted ? 'fa-rotate-right' : 'fa-play'}"></i>
+                                ${isCompleted ? 'Refă Testul' : 'Începe Testul'}
+                            </button>
+
+                            ${isCompleted ? `
+                                <button onclick="resetSingleLectureProgress('${lecture.id}', event)" class="text-xs text-slate-500 hover:text-rose-400 font-semibold px-2 py-1 transition-colors" title="Șterge scorul">
+                                    <i class="fa-solid fa-trash-can mr-1"></i> Şterge Scor
+                                </button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                grid.insertAdjacentHTML('beforeend', cardHtml);
+            });
+
+            // Summary Calc
+            const overallPct = completedLectures > 0 ? Math.round(sumPercentage / totalLectures) : 0;
+            const avgPct = completedLectures > 0 ? Math.round(sumPercentage / completedLectures) : 0;
+
+            document.getElementById('overallPercentage').innerText = `${overallPct}%`;
+            document.getElementById('overallProgressBar').style.width = `${overallPct}%`;
+            document.getElementById('completedCount').innerText = `${completedLectures} / ${totalLectures}`;
+            document.getElementById('averageScore').innerText = `${avgPct}%`;
+        }
+
+        function startQuiz(lectureId) {
+            currentLecture = lecturesData.find(l => l.id === lectureId);
+            if (!currentLecture) return;
+
+            currentQuestionIndex = 0;
+            userAnswers = {};
+
+            document.getElementById('quizBadge').innerText = currentLecture.badge;
+            document.getElementById('quizTitle').innerText = currentLecture.title;
+            document.getElementById('totalQuestionsNum').innerText = currentLecture.questions.length;
+
+            document.getElementById('dashboardView').classList.add('hidden');
+            document.getElementById('resultsView').classList.add('hidden');
+            document.getElementById('quizView').classList.remove('hidden');
+
+            renderQuestion();
+            renderQuestionMap();
+        }
+
+        function renderQuestion() {
+            const q = currentLecture.questions[currentQuestionIndex];
+            
+            document.getElementById('currentQuestionNum').innerText = currentQuestionIndex + 1;
+            document.getElementById('questionCategory').innerText = q.category || 'Seminar';
+            document.getElementById('questionText').innerText = q.question;
+
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = '';
+
+            const selectedOption = userAnswers[q.id];
+
+            q.options.forEach((opt, idx) => {
+                const isSelected = selectedOption === idx;
+                const optEl = document.createElement('div');
+                
+                optEl.className = `p-4 rounded-2xl border-2 cursor-pointer transition-all flex items-center justify-between ${
+                    isSelected 
+                        ? 'border-brand-500 bg-brand-500/10 text-white font-medium shadow-md' 
+                        : 'border-slate-800 bg-slate-900/60 hover:border-slate-700 hover:bg-slate-800/50 text-slate-300'
+                }`;
+                optEl.onclick = () => selectOption(q.id, idx);
+
+                optEl.innerHTML = `
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-8 h-8 rounded-xl border-2 flex items-center justify-center font-bold text-xs shrink-0 ${
+                            isSelected ? 'border-brand-500 bg-brand-500 text-white' : 'border-slate-700 text-slate-400 bg-slate-800'
+                        }">
+                            ${String.fromCharCode(65 + idx)}
+                        </div>
+                        <span class="text-xs sm:text-sm leading-snug">${opt}</span>
+                    </div>
+                    ${isSelected ? '<i class="fa-solid fa-circle-check text-brand-400 text-lg ml-2 shrink-0"></i>' : ''}
+                `;
+                container.appendChild(optEl);
+            });
+
+            // Buttons
+            document.getElementById('prevBtn').disabled = currentQuestionIndex === 0;
+
+            const isLast = currentQuestionIndex === currentLecture.questions.length - 1;
+            if (isLast) {
+                document.getElementById('nextBtn').classList.add('hidden');
+                document.getElementById('submitBtn').classList.remove('hidden');
+            } else {
+                document.getElementById('nextBtn').classList.remove('hidden');
+                document.getElementById('submitBtn').classList.add('hidden');
+            }
+
+            renderQuestionMap();
+        }
+
+        function selectOption(questionId, optionIndex) {
+            userAnswers[questionId] = optionIndex;
+            renderQuestion();
+        }
+
+        function navigateQuestion(dir) {
+            const newIndex = currentQuestionIndex + dir;
+            if (newIndex >= 0 && newIndex < currentLecture.questions.length) {
+                currentQuestionIndex = newIndex;
+                renderQuestion();
+            }
+        }
+
+        function renderQuestionMap() {
+            const grid = document.getElementById('questionMapGrid');
+            grid.innerHTML = '';
+
+            const answeredCount = Object.keys(userAnswers).length;
+            document.getElementById('answeredBadge').innerText = `${answeredCount}/10`;
+
+            currentLecture.questions.forEach((q, idx) => {
+                const isAnswered = userAnswers[q.id] !== undefined;
+                const isCurrent = idx === currentQuestionIndex;
+
+                let btnClass = 'bg-slate-800/80 text-slate-400 border-slate-700/80';
+                if (isAnswered) btnClass = 'bg-brand-600 text-white border-brand-500 font-bold';
+                if (isCurrent) btnClass += ' ring-2 ring-brand-400 ring-offset-2 ring-offset-navy-950 font-black';
+
+                const btn = document.createElement('button');
+                btn.className = `h-9 rounded-xl border text-xs flex items-center justify-center transition-all ${btnClass}`;
+                btn.innerText = idx + 1;
+                btn.onclick = () => {
+                    currentQuestionIndex = idx;
+                    renderQuestion();
+                };
+                grid.appendChild(btn);
+            });
+        }
+
+        function submitQuiz() {
+            const totalQuestions = currentLecture.questions.length;
+            const answeredCount = Object.keys(userAnswers).length;
+
+            if (answeredCount < totalQuestions) {
+                if (!confirm(`Ai răspuns la ${answeredCount} din ${totalQuestions} grile. Dorești să trimiți testul acum?`)) {
+                    return;
+                }
+            }
+
+            let score = 0;
+            currentLecture.questions.forEach(q => {
+                if (userAnswers[q.id] === q.correctIndex) {
+                    score++;
+                }
+            });
+
+            const percentage = Math.round((score / totalQuestions) * 100);
+
+            // Store high scores
+            appScores[currentLecture.id] = {
+                score,
+                total: totalQuestions,
+                percentage
+            };
+            saveScoresToStorage();
+
+            displayResults(score, totalQuestions, percentage);
+        }
+
+        function displayResults(score, total, percentage) {
+            document.getElementById('quizView').classList.add('hidden');
+            document.getElementById('resultsView').classList.remove('hidden');
+
+            document.getElementById('finalScoreText').innerText = `${score} / ${total}`;
+            document.getElementById('finalPercentageText').innerText = `${percentage}%`;
+
+            const iconEl = document.getElementById('resultIcon');
+            const msgEl = document.getElementById('resultMessage');
+
+            if (percentage >= 80) {
+                iconEl.className = 'inline-flex p-5 rounded-3xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-5xl shadow-xl';
+                iconEl.innerHTML = '<i class="fa-solid fa-trophy"></i>';
+                msgEl.innerText = 'Felicitări! Rezultat Excelent!';
+            } else if (percentage >= 50) {
+                iconEl.className = 'inline-flex p-5 rounded-3xl bg-amber-500/10 text-amber-400 border border-amber-500/30 text-5xl shadow-xl';
+                iconEl.innerHTML = '<i class="fa-solid fa-medal"></i>';
+                msgEl.innerText = 'Rezultat Bun! Poți Reîncerca!';
+            } else {
+                iconEl.className = 'inline-flex p-5 rounded-3xl bg-rose-500/10 text-rose-400 border border-rose-500/30 text-5xl shadow-xl';
+                iconEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i>';
+                msgEl.innerText = 'Necesită Aprofundare!';
+            }
+
+            document.getElementById('retryBtn').onclick = () => startQuiz(currentLecture.id);
+
+            // Detailed Feedback Render
+            const container = document.getElementById('detailedFeedbackContainer');
+            container.innerHTML = '';
+
+            currentLecture.questions.forEach((q, idx) => {
+                const userAns = userAnswers[q.id];
+                const isCorrect = userAns === q.correctIndex;
+
+                const card = document.createElement('div');
+                card.className = `p-6 rounded-2xl border ${
+                    isCorrect ? 'border-emerald-500/30 bg-emerald-950/10' : 'border-rose-500/30 bg-rose-950/10'
+                } space-y-4`;
+
+                const statusBadge = isCorrect 
+                    ? '<span class="px-2.5 py-1 text-xs font-bold rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"><i class="fa-solid fa-check mr-1"></i> Corect</span>'
+                    : '<span class="px-2.5 py-1 text-xs font-bold rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30"><i class="fa-solid fa-xmark mr-1"></i> Greșit / Necompletat</span>';
+
+                let optionsHtml = q.options.map((opt, oIdx) => {
+                    let optStyle = 'border-slate-800 bg-slate-900/80 text-slate-300';
+                    let optIcon = '';
+
+                    if (oIdx === q.correctIndex) {
+                        optStyle = 'border-emerald-500/50 bg-emerald-500/20 font-semibold text-emerald-200';
+                        optIcon = '<i class="fa-solid fa-check text-emerald-400 ml-auto shrink-0"></i>';
+                    } else if (oIdx === userAns && !isCorrect) {
+                        optStyle = 'border-rose-500/50 bg-rose-500/20 font-semibold text-rose-200';
+                        optIcon = '<i class="fa-solid fa-xmark text-rose-400 ml-auto shrink-0"></i>';
+                    }
+
+                    return `
+                        <div class="p-3 rounded-xl border text-xs sm:text-sm flex items-center justify-between ${optStyle}">
+                            <span><strong>${String.fromCharCode(65 + oIdx)}.</strong> ${opt}</span>
+                            ${optIcon}
+                        </div>
+                    `;
+                }).join('');
+
+                card.innerHTML = `
+                    <div class="flex items-center justify-between gap-4">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Grila ${idx + 1}</span>
+                        ${statusBadge}
+                    </div>
+                    <h4 class="font-bold text-white text-base leading-snug">${q.question}</h4>
+                    <div class="space-y-2 pt-1">
+                        ${optionsHtml}
+                    </div>
+                    <div class="p-3.5 bg-slate-900/90 rounded-xl border border-slate-800 text-xs text-slate-300 leading-relaxed">
+                        <strong class="text-brand-400 font-semibold"><i class="fa-solid fa-circle-info mr-1"></i> Explicație teoretică:</strong> ${q.explanation}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
